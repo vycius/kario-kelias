@@ -1,22 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:kario_kelias/api/api_service.dart';
+import 'package:kario_kelias/components/quiz/lost_component.dart';
 import 'package:kario_kelias/components/quiz/won_component.dart';
 import 'package:kario_kelias/questions.dart';
 
 class QuizComponent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<Game>(
-      future: ApiService().startGame(),
-      builder: (context, snapshot) {
-        if (snapshot.hasData) {
-          return GameComponent(game: snapshot.data);
-        } else if (snapshot.hasError) {
-          return Text("${snapshot.error}");
-        }
+    return Scaffold(
+      body: SafeArea(
+        child: FutureBuilder<Game>(
+          future: ApiService().startGame(),
+          builder: (context, snapshot) {
+            if (snapshot.hasData) {
+              return GameComponent(game: snapshot.data);
+            } else if (snapshot.hasError) {
+              return Text("${snapshot.error}");
+            }
 
-        return CircularProgressIndicator();
-      },
+            return Center(child: CircularProgressIndicator());
+          },
+        ),
+      ),
     );
   }
 }
@@ -61,7 +66,13 @@ class _GameComponentState extends State<GameComponent> {
       failedAnswer: answer,
     );
 
-    print("Game lost");
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(
+          builder: (context) => LostComponent(
+                game: game,
+              )),
+    );
   }
 
   void nextQuestion() {

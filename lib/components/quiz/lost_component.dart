@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:kario_kelias/components/quiz/quiz_component.dart';
 import 'package:kario_kelias/questions.dart';
-import 'package:url_launcher/url_launcher.dart';
 
-class WonComponent extends StatelessWidget {
+class LostComponent extends StatelessWidget {
   final Game game;
 
-  const WonComponent({Key key, this.game}) : super(key: key);
+  const LostComponent({Key key, this.game}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -14,16 +13,17 @@ class WonComponent extends StatelessWidget {
       appBar: AppBar(
         // Here we take the value from the MyHomePage object that was created by
         // the App.build method, and use it to set our appbar title.
-        title: Text("Laimėjai"),
+        title: Text("Pralaimėjai"),
       ),
       body: Column(
         children: <Widget>[
           Column(
             children: [
-              Center(child: Text("Dar viena pergalė.\nTu jau “rangas”")),
+              Center(child: Text("Puolimas nepaėjo. Nusvilai.")),
+              Center(child: Text(game.getCurrentQuestion().explanation)),
               Center(
                 child: MaterialButton(
-                  child: Text("Kylam toliau!"),
+                  child: Text("Pabandom dar kartą?"),
                   onPressed: () {
                     Navigator.pushReplacement(
                       context,
@@ -37,22 +37,6 @@ class WonComponent extends StatelessWidget {
                   child: Text("Pasiilsim"),
                   onPressed: () {
                     Navigator.pop(context);
-                  },
-                ),
-              ),
-              Center(
-                child: Text("Kario kelias veža? Nori išbandyti?"),
-              ),
-              Center(
-                child: MaterialButton(
-                  child: Text("Sužinoti daugiau"),
-                  onPressed: () async {
-                    const url = 'https://www.karys.lt/';
-                    if (await canLaunch(url)) {
-                      await launch(url);
-                    } else {
-                      throw 'Could not launch $url';
-                    }
                   },
                 ),
               ),
