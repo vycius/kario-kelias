@@ -95,4 +95,14 @@ class ApiService {
       },
     );
   }
+
+  Future<List<Result>> getResults() async {
+    final response = await dio.get(
+      '/v1/game/results/',
+    );
+
+    return response.data
+        .map<Result>((model) => Result.fromJson(model))
+        .toList();
+  }
 }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:kario_kelias/api/api_service.dart';
 import 'package:kario_kelias/components/quiz/quiz_component.dart';
+import 'package:kario_kelias/components/results/results_component.dart';
 
 class AppComponent extends StatelessWidget {
   // This widget is the root of your application.
@@ -90,7 +91,12 @@ class _MyHomePageState extends State<MyHomePage> {
               Center(
                 child: MaterialButton(
                   child: Text("Rezultatai"),
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => ResultsComponent()),
+                    );
+                  },
                 ),
               ),
             ],

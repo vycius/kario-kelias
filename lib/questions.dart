@@ -4,6 +4,42 @@ import 'package:json_annotation/json_annotation.dart';
 part 'questions.g.dart';
 
 @JsonSerializable()
+class User extends Equatable {
+  final String name;
+  final String photo;
+
+  User({
+    this.name,
+    this.photo,
+  }) : super([
+          name,
+          photo,
+        ]);
+
+  factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
+
+  Map<String, dynamic> toJson() => _$UserToJson(this);
+}
+
+@JsonSerializable()
+class Result extends Equatable {
+  final int points;
+  final String rank;
+  final User user;
+
+  Result({this.points, this.rank, this.user})
+      : super([
+          points,
+          rank,
+          user,
+        ]);
+
+  factory Result.fromJson(Map<String, dynamic> json) => _$ResultFromJson(json);
+
+  Map<String, dynamic> toJson() => _$ResultToJson(this);
+}
+
+@JsonSerializable()
 class Question extends Equatable {
   final int id;
   final String text;

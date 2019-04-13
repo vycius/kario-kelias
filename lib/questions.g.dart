@@ -6,6 +6,28 @@ part of 'questions.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
+User _$UserFromJson(Map<String, dynamic> json) {
+  return User(name: json['name'] as String, photo: json['photo'] as String);
+}
+
+Map<String, dynamic> _$UserToJson(User instance) =>
+    <String, dynamic>{'name': instance.name, 'photo': instance.photo};
+
+Result _$ResultFromJson(Map<String, dynamic> json) {
+  return Result(
+      points: json['points'] as int,
+      rank: json['rank'] as String,
+      user: json['user'] == null
+          ? null
+          : User.fromJson(json['user'] as Map<String, dynamic>));
+}
+
+Map<String, dynamic> _$ResultToJson(Result instance) => <String, dynamic>{
+      'points': instance.points,
+      'rank': instance.rank,
+      'user': instance.user
+    };
+
 Question _$QuestionFromJson(Map<String, dynamic> json) {
   return Question(
       id: json['id'] as int,
