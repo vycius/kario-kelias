@@ -87,7 +87,7 @@ class ApiService {
     Answer failedAnswer,
   }) async {
     await dio.patch(
-      '/v1/game/finish/${game.gameId}',
+      '/v1/game/finish/${game.gameId}/',
       data: {
         'answered_questions': game.getAnsweredQuestionIds(),
         'is_finished': finished,

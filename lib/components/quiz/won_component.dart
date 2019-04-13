@@ -20,7 +20,9 @@ class WonComponent extends StatelessWidget {
         children: <Widget>[
           Column(
             children: [
-              Center(child: Text("Dar viena pergalė.\nTu jau “rangas”")),
+              Center(
+                  child: Text(
+                      "Dar viena pergalė.\nTu jau ${game.userInfo.nextRank}")),
               Center(
                 child: MaterialButton(
                   child: Text("Kylam toliau!"),

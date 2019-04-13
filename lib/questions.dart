@@ -51,11 +51,35 @@ class Answer extends Equatable {
 }
 
 @JsonSerializable()
+class UserInfo extends Equatable {
+  final String rank;
+
+  @JsonKey(name: 'next_rank')
+  final String nextRank;
+
+  UserInfo({
+    this.rank,
+    this.nextRank,
+  }) : super([
+          rank,
+          nextRank,
+        ]);
+
+  factory UserInfo.fromJson(Map<String, dynamic> json) =>
+      _$UserInfoFromJson(json);
+
+  Map<String, dynamic> toJson() => _$UserInfoToJson(this);
+}
+
+@JsonSerializable()
 class Game extends Equatable {
   @JsonKey(name: 'game_id')
   final String gameId;
 
   final List<Question> questions;
+
+  @JsonKey(name: 'user_info')
+  final UserInfo userInfo;
 
   @JsonKey(ignore: true)
   List<Question> answeredQuestions = [];
@@ -63,9 +87,11 @@ class Game extends Equatable {
   Game({
     this.gameId,
     this.questions,
+    this.userInfo,
   }) : super([
           gameId,
           questions,
+          userInfo,
         ]);
 
   bool isGameFinished() {
