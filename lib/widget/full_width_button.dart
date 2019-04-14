@@ -17,16 +17,37 @@ class FullWidthButton extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: SizedBox(
-        width: double.infinity,
-        child: RaisedButton(
-          child: Text(
-            text,
-            style: TextStyle(fontSize: fontSize),
-          ),
-          padding: EdgeInsets.all(16),
-          onPressed: onPressed,
-        ),
+          width: double.infinity,
+          child: WidthButton(
+            onPressed: onPressed,
+            text: text,
+            fontSize: fontSize,
+          )),
+    );
+  }
+}
+
+class WidthButton extends StatelessWidget {
+  final VoidCallback onPressed;
+  final String text;
+  final double fontSize;
+
+  const WidthButton({
+    Key key,
+    this.onPressed,
+    this.text,
+    this.fontSize = 32,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return RaisedButton(
+      child: Text(
+        text,
+        style: TextStyle(fontSize: fontSize),
       ),
+      padding: EdgeInsets.all(16),
+      onPressed: onPressed,
     );
   }
 }

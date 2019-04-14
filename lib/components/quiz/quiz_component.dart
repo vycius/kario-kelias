@@ -1,4 +1,7 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:kario_kelias/api/api_service.dart';
 import 'package:kario_kelias/components/quiz/lost_component.dart';
 import 'package:kario_kelias/components/quiz/won_component.dart';
@@ -49,8 +52,7 @@ class _GameComponentState extends State<GameComponent> {
           Column(
             children: [
               QuestionComponent(
-                question: game.getCurrentQuestion(),
-              ),
+                  question: game.getCurrentQuestion(), game: game),
             ],
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -137,9 +139,11 @@ class AnswerComponent extends StatelessWidget {
 
 class QuestionComponent extends StatelessWidget {
   final Question question;
+  final Game game;
 
-  const QuestionComponent({Key key, @required this.question})
+  const QuestionComponent({Key key, @required this.question, this.game})
       : assert(question != null),
+        assert(game != null),
         super(key: key);
 
   @override
@@ -154,17 +158,42 @@ class QuestionComponent extends StatelessWidget {
       children: answers,
     );
 
-    return Column(
-      children: <Widget>[
-        Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Column(
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Column(
+        children: <Widget>[
+          Column(
             children: [
+              Padding(
+                padding: const EdgeInsets.only(bottom: 16),
+                child: Row(
+                  children: <Widget>[
+                    Padding(
+                      padding: const EdgeInsets.only(left: 8),
+                      child: WidthButton(
+                        text:
+                            "${game.answeredQuestions.length + 1}/${game.questions.length}",
+                        fontSize: 14,
+                        onPressed: () {},
+                      ),
+                    ),
+                    Expanded(
+                      child: Align(
+                        alignment: Alignment.topRight,
+                        child: Padding(
+                          padding: const EdgeInsets.only(right: 8),
+                          child: CountdownTimerComponent(),
+                        ),
+                      ),
+                    )
+                  ],
+                ),
+              ),
               Padding(
                 padding: const EdgeInsets.fromLTRB(0, 16, 0, 32),
                 child: FullWidthButton(
                   text: question.text,
-                  fontSize: 21,
+                  fontSize: 24,
                   onPressed: () {},
                 ),
               ),
@@ -173,8 +202,44 @@ class QuestionComponent extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
           ),
-        ),
-      ],
+        ],
+      ),
+    );
+  }
+}
+
+class CountdownTimerComponent extends StatefulWidget {
+  @override
+  State<StatefulWidget> createState() {
+    return CountdownTimerComponentState();
+  }
+}
+
+class CountdownTimerComponentState extends State<CountdownTimerComponent> {
+  final startedTime = DateTime.now();
+  final maximumTimeSecs = 120;
+
+  @override
+  Widget build(BuildContext context) {
+    return StreamBuilder(
+      stream: Stream.periodic(Duration(microseconds: 100), (i) => i),
+      builder: (BuildContext context, AsyncSnapshot<int> snapshot) {
+        DateFormat format = DateFormat("mm:ss");
+        int now = DateTime.now().millisecondsSinceEpoch;
+        var diff = max(
+            startedTime.millisecondsSinceEpoch + maximumTimeSecs * 1000 - now,
+            0);
+
+        Duration remaining = Duration(milliseconds: diff);
+        var dateString =
+            '${format.format(DateTime.fromMillisecondsSinceEpoch(remaining.inMilliseconds))}';
+
+        return WidthButton(
+          text: dateString,
+          fontSize: 14,
+          onPressed: () {},
+        );
+      },
     );
   }
 }
