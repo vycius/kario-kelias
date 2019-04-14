@@ -23,7 +23,7 @@ class AppComponent extends StatelessWidget {
         // Notice that the counter didn't reset back to zero; the application
         // is not restarted.
         primarySwatch: Colors.green,
-        scaffoldBackgroundColor: Color.fromRGBO(0x11, 0x5c, 0x2f, 1),
+        scaffoldBackgroundColor: Color.fromRGBO(0x25, 0x6c, 0x43, 1),
       ),
 //      home: MyHomePage(title: 'Kario kelias'),
       home: UserLoginFullscreenComponent(),

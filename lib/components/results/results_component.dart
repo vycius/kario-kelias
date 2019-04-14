@@ -10,6 +10,7 @@ class ResultsComponent extends StatelessWidget {
     return DefaultTabController(
       length: 2,
       child: Scaffold(
+        backgroundColor: Colors.white,
         appBar: AppBar(
           bottom: TabBar(
             tabs: [
