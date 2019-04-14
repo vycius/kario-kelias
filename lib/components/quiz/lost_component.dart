@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:kario_kelias/components/quiz/quiz_component.dart';
 import 'package:kario_kelias/questions.dart';
+import 'package:kario_kelias/widget/full_width_button.dart';
 
 class LostComponent extends StatelessWidget {
   final Game game;
@@ -21,24 +22,22 @@ class LostComponent extends StatelessWidget {
             children: [
               Center(child: Text("Puolimas nepaėjo. Nusvilai.")),
               Center(child: Text(game.getCurrentQuestion().explanation)),
-              Center(
-                child: MaterialButton(
-                  child: Text("Pabandom dar kartą?"),
-                  onPressed: () {
-                    Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(builder: (context) => QuizComponent()),
-                    );
-                  },
-                ),
+              FullWidthButton(
+                text: "Pabandom dar kartą?",
+                fontSize: 24,
+                onPressed: () {
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(builder: (context) => QuizComponent()),
+                  );
+                },
               ),
-              Center(
-                child: MaterialButton(
-                  child: Text("Pasiilsim"),
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                ),
+              FullWidthButton(
+                text: "Pasiilsim",
+                fontSize: 24,
+                onPressed: () {
+                  Navigator.pop(context);
+                },
               ),
             ],
             mainAxisAlignment: MainAxisAlignment.center,

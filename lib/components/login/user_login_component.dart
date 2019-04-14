@@ -44,8 +44,8 @@ class _UserLoginComponentState extends State<UserLoginComponent> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-        child: new Column(
+    return Scaffold(
+        body: new Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
         Padding(

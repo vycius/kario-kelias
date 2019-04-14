@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:kario_kelias/components/quiz/quiz_component.dart';
 import 'package:kario_kelias/questions.dart';
+import 'package:kario_kelias/widget/full_width_button.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class WonComponent extends StatelessWidget {
@@ -23,40 +24,37 @@ class WonComponent extends StatelessWidget {
               Center(
                   child: Text(
                       "Dar viena pergalė.\nTu jau ${game.userInfo.nextRank}")),
-              Center(
-                child: MaterialButton(
-                  child: Text("Kylam toliau!"),
-                  onPressed: () {
-                    Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(builder: (context) => QuizComponent()),
-                    );
-                  },
-                ),
+              FullWidthButton(
+                text: "Kylam toliau!",
+                fontSize: 24,
+                onPressed: () {
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(builder: (context) => QuizComponent()),
+                  );
+                },
               ),
-              Center(
-                child: MaterialButton(
-                  child: Text("Pasiilsim"),
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                ),
+              FullWidthButton(
+                text: "Pasiilsim",
+                fontSize: 24,
+                onPressed: () {
+                  Navigator.pop(context);
+                },
               ),
               Center(
                 child: Text("Kario kelias veža? Nori išbandyti?"),
               ),
-              Center(
-                child: MaterialButton(
-                  child: Text("Sužinoti daugiau"),
-                  onPressed: () async {
-                    const url = 'https://www.karys.lt/';
-                    if (await canLaunch(url)) {
-                      await launch(url);
-                    } else {
-                      throw 'Could not launch $url';
-                    }
-                  },
-                ),
+              FullWidthButton(
+                text: "Sužinoti daugiau",
+                fontSize: 24,
+                onPressed: () async {
+                  const url = 'https://www.karys.lt/';
+                  if (await canLaunch(url)) {
+                    await launch(url);
+                  } else {
+                    throw 'Could not launch $url';
+                  }
+                },
               ),
             ],
             mainAxisAlignment: MainAxisAlignment.center,

@@ -3,6 +3,7 @@ import 'package:kario_kelias/api/api_service.dart';
 import 'package:kario_kelias/components/quiz/lost_component.dart';
 import 'package:kario_kelias/components/quiz/won_component.dart';
 import 'package:kario_kelias/questions.dart';
+import 'package:kario_kelias/widget/full_width_button.dart';
 
 class QuizComponent extends StatelessWidget {
   @override
@@ -106,31 +107,30 @@ class AnswerComponent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: MaterialButton(
-        child: Text(answer.text),
-        onPressed: () {
-          print("Answer ${answer.text}");
+    return FullWidthButton(
+      text: answer.text,
+      fontSize: 21,
+      onPressed: () {
+        print("Answer ${answer.text}");
 
-          final _GameComponentState navigator = context
-              .ancestorStateOfType(const TypeMatcher<_GameComponentState>());
+        final _GameComponentState navigator = context
+            .ancestorStateOfType(const TypeMatcher<_GameComponentState>());
 
-          assert(() {
-            if (navigator == null) {
-              throw new FlutterError(
-                  'AnswerComponent operation requested with a context that does '
-                  'not include a _GameComponentState.');
-            }
-            return true;
-          }());
-
-          if (answer.isCorrect) {
-            navigator.nextQuestion();
-          } else {
-            navigator.lostGame(answer);
+        assert(() {
+          if (navigator == null) {
+            throw new FlutterError(
+                'AnswerComponent operation requested with a context that does '
+                'not include a _GameComponentState.');
           }
-        },
-      ),
+          return true;
+        }());
+
+        if (answer.isCorrect) {
+          navigator.nextQuestion();
+        } else {
+          navigator.lostGame(answer);
+        }
+      },
     );
   }
 }

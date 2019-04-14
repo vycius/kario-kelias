@@ -3,6 +3,7 @@ import 'package:kario_kelias/authentication/authentication_manager.dart';
 import 'package:kario_kelias/components/login/user_login_component.dart';
 import 'package:kario_kelias/components/quiz/quiz_component.dart';
 import 'package:kario_kelias/components/results/results_component.dart';
+import 'package:kario_kelias/widget/full_width_button.dart';
 
 class HomeComponent extends StatelessWidget {
   @override
@@ -28,11 +29,12 @@ class HomeComponent extends StatelessWidget {
               child: Image.asset("assets/logo.png"),
             ),
           ),
-          Column(
-            children: [
-              Center(
-                child: MaterialButton(
-                  child: Text("Žaisti"),
+          Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              children: [
+                FullWidthButton(
+                  text: "Žaisti",
                   onPressed: () {
                     Navigator.push(
                       context,
@@ -40,10 +42,8 @@ class HomeComponent extends StatelessWidget {
                     );
                   },
                 ),
-              ),
-              Center(
-                child: MaterialButton(
-                  child: Text("Rezultatai"),
+                FullWidthButton(
+                  text: "Rezultatai",
                   onPressed: () {
                     Navigator.push(
                       context,
@@ -52,9 +52,16 @@ class HomeComponent extends StatelessWidget {
                     );
                   },
                 ),
-              ),
-              Center(
-                child: MaterialButton(
+              ],
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+            ),
+          ),
+          Expanded(
+            child: Align(
+              alignment: FractionalOffset.bottomCenter,
+              child: Center(
+                child: RaisedButton(
                   child: Text("Atsijungti"),
                   onPressed: () async {
                     await AuthenticationManager().logout();
@@ -67,9 +74,7 @@ class HomeComponent extends StatelessWidget {
                   },
                 ),
               ),
-            ],
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
+            ),
           ),
         ],
       ),
