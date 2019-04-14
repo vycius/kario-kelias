@@ -27,6 +27,7 @@ class AppComponent extends StatelessWidget {
       ),
 //      home: MyHomePage(title: 'Kario kelias'),
       home: UserLoginFullscreenComponent(),
+      debugShowCheckedModeBanner: false,
       localizationsDelegates: [
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,

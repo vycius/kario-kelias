@@ -26,9 +26,7 @@ class ApiService {
   ApiService._internal() {
     dio.interceptors
         .add(InterceptorsWrapper(onRequest: (RequestOptions options) async {
-          print("Before API token");
       final apiToken = await _appPreferences.getApiToken();
-          print("Api token $apiToken");
 
       if (apiToken != null) {
         _addHeaderApiToken(options.headers, apiToken);
