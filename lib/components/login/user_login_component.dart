@@ -29,8 +29,6 @@ class _UserLoginComponentState extends State<UserLoginComponent> {
 
   StreamSubscription<FirebaseUser> _listener;
 
-  FirebaseUser _currentUser;
-
   @override
   void initState() {
     super.initState();
@@ -47,39 +45,40 @@ class _UserLoginComponentState extends State<UserLoginComponent> {
   @override
   Widget build(BuildContext context) {
     return Container(
-        decoration: new BoxDecoration(color: Theme.of(context).primaryColor),
         child: new Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Padding(
-              padding: const EdgeInsets.all(24.0),
-              child: FractionallySizedBox(
-                widthFactor: 0.4,
-                child: Image.asset("assets/logo.png"),
-              ),
-            ),
-            new Expanded(
-              child: new LoginView(
-                providers: [
-                  ProvidersTypes.google,
-                ],
-                passwordCheck: false,
-              ),
-            ),
-          ],
-        ));
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: <Widget>[
+        Padding(
+          padding: const EdgeInsets.all(24.0),
+          child: FractionallySizedBox(
+            widthFactor: 0.4,
+            child: Image.asset("assets/logo.png"),
+          ),
+        ),
+        new Expanded(
+          child: new LoginView(
+            providers: [
+              ProvidersTypes.google,
+            ],
+            passwordCheck: false,
+          ),
+        ),
+      ],
+    ));
   }
 
   void _checkCurrentUser() async {
-    _currentUser = await _authenticationManager.getCurrentUser();
+    await _authenticationManager.getCurrentUser();
     setState(() {});
 
     _listener = _authenticationManager.listenForUser((FirebaseUser user) {
       if (_listener != null) {
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(builder: (context) => HomeComponent()),
-        );
+        if (user != null) {
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (context) => HomeComponent()),
+          );
+        }
       }
     }, onError: (ex) {
       Scaffold.of(context).showSnackBar(

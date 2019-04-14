@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:kario_kelias/authentication/authentication_manager.dart';
+import 'package:kario_kelias/components/login/user_login_component.dart';
 import 'package:kario_kelias/components/quiz/quiz_component.dart';
 import 'package:kario_kelias/components/results/results_component.dart';
 
@@ -19,7 +21,13 @@ class HomeComponent extends StatelessWidget {
       ),
       body: Column(
         children: <Widget>[
-          Image.asset("assets/logo.png"),
+          Padding(
+            padding: const EdgeInsets.all(24.0),
+            child: FractionallySizedBox(
+              widthFactor: 0.6,
+              child: Image.asset("assets/logo.png"),
+            ),
+          ),
           Column(
             children: [
               Center(
@@ -41,6 +49,20 @@ class HomeComponent extends StatelessWidget {
                       context,
                       MaterialPageRoute(
                           builder: (context) => ResultsComponent()),
+                    );
+                  },
+                ),
+              ),
+              Center(
+                child: MaterialButton(
+                  child: Text("Atsijungti"),
+                  onPressed: () async {
+                    await AuthenticationManager().logout();
+
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => UserLoginComponent()),
                     );
                   },
                 ),
