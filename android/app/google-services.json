@@ -129,6 +129,22 @@
           }
         },
         {
+          "client_id": "257660888115-b50ipe52s3326te85sf1pvcmuougkd53.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "lt.karys.kario_kelias",
+            "certificate_hash": "518d7fabda42efc74157a29e7f47e0e55cc2a3fb"
+          }
+        },
+        {
+          "client_id": "257660888115-4o1c6objritish7ricpnprl7vrgd9ret.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "lt.karys.kario_kelias",
+            "certificate_hash": "e8ce187b938f21a11db7a92f06917eee94eb8d23"
+          }
+        },
+        {
           "client_id": "257660888115-h7lp6c20r47jkr05hnn5lt0ja0jqbcfh.apps.googleusercontent.com",
           "client_type": 3
         }
