@@ -11,9 +11,6 @@ class UserLoginFullscreenComponent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Prisijunkite"),
-      ),
       body: UserLoginComponent(),
     );
   }
