@@ -6,6 +6,7 @@ import 'package:kario_kelias/components/app/app_component.dart';
 
 Future<Null> main() async {
   FlutterError.onError = (FlutterErrorDetails details) async {
+    print(details);
     FlutterError.dumpErrorToConsole(details);
   };
 
