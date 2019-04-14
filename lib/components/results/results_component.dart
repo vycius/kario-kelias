@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_advanced_networkimage/provider.dart';
 import 'package:kario_kelias/api/api_service.dart';
-import 'package:kario_kelias/components/quiz/quiz_component.dart';
 import 'package:kario_kelias/questions.dart';
+import 'package:kario_kelias/widget/full_width_button.dart';
 
 class ResultsComponent extends StatelessWidget {
   @override
@@ -53,16 +53,28 @@ class ResultsBodyComponent extends StatelessWidget {
 
 class ScoresComponent extends StatelessWidget {
   final List<Result> results;
+  final bool isWeekly;
 
-  const ScoresComponent({Key key, this.results}) : super(key: key);
+  const ScoresComponent({Key key, this.results, this.isWeekly = true})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
-      itemCount: results.length,
+      itemCount: results.length + 1,
       padding: const EdgeInsets.all(15.0),
       itemBuilder: (context, position) {
-        return ResultCell(result: results[position]);
+        if (position == 0) {
+          return FullWidthButton(
+            text: (this.isWeekly
+                ? "Žaisk ir laimėk savaitės atostogas Rukloje"
+                : "Žaisk ir laimėk mėnesio atostogas Rukloje"),
+            fontSize: 20,
+            onPressed: () {},
+          );
+        } else {
+          return ResultCell(result: results[position - 1]);
+        }
       },
     );
   }

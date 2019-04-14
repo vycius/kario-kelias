@@ -113,6 +113,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "257660888115-hv94dc2pvgv6mvte9q4o3k6mnujetrf3.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "lt.karys.kario_kelias",
+            "certificate_hash": "d3607316cc6fccb27e08a41470b939b638a5a0e8"
+          }
+        },
+        {
           "client_id": "257660888115-2akdbgs2i2vbrqfjh5mfre630gs8c92b.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
