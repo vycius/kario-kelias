@@ -15,17 +15,12 @@ class HomeComponent extends StatelessWidget {
     // fast, so that you can just rebuild anything that needs updating rather
     // than having to individually change instances of widgets.
     return Scaffold(
-      appBar: AppBar(
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
-        title: Text("Kario kelias"),
-      ),
       body: Column(
         children: <Widget>[
           Padding(
-            padding: const EdgeInsets.all(24.0),
+            padding: const EdgeInsets.fromLTRB(24, 64, 24, 24),
             child: FractionallySizedBox(
-              widthFactor: 0.6,
+              widthFactor: 0.7,
               child: Image.asset("assets/logo.png"),
             ),
           ),

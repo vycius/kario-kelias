@@ -156,13 +156,23 @@ class QuestionComponent extends StatelessWidget {
 
     return Column(
       children: <Widget>[
-        Column(
-          children: [
-            Text(question.text),
-            answersColumn,
-          ],
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.fromLTRB(0, 16, 0, 32),
+                child: FullWidthButton(
+                  text: question.text,
+                  fontSize: 21,
+                  onPressed: () {},
+                ),
+              ),
+              answersColumn,
+            ],
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+          ),
         ),
       ],
     );

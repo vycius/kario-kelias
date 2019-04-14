@@ -12,18 +12,25 @@ class WonComponent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
-        title: Text("Laimėjai"),
-      ),
-      body: Column(
-        children: <Widget>[
-          Column(
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
             children: [
-              Center(
+              Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Center(
                   child: Text(
-                      "Dar viena pergalė.\nTu jau ${game.userInfo.nextRank}")),
+                    "Dar viena pergalė!\nTu jau ${game.userInfo.nextRank}",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 32,
+                    ),
+                  ),
+                ),
+              ),
               FullWidthButton(
                 text: "Kylam toliau!",
                 fontSize: 24,
@@ -41,8 +48,24 @@ class WonComponent extends StatelessWidget {
                   Navigator.pop(context);
                 },
               ),
-              Center(
-                child: Text("Kario kelias veža? Nori išbandyti?"),
+              Padding(
+                padding: const EdgeInsets.only(
+                  top: 32,
+                  bottom: 8,
+                  right: 8,
+                  left: 8,
+                ),
+                child: Center(
+                  child: Text(
+                    "Kario kelias veža!\nNori išbandyti?",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 24,
+                    ),
+                  ),
+                ),
               ),
               FullWidthButton(
                 text: "Sužinoti daugiau",
@@ -60,7 +83,7 @@ class WonComponent extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
           ),
-        ],
+        ),
       ),
     );
   }

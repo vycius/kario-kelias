@@ -11,39 +11,58 @@ class LostComponent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
-        title: Text("Pralaimėjai"),
-      ),
-      body: Column(
-        children: <Widget>[
-          Column(
-            children: [
-              Center(child: Text("Puolimas nepaėjo. Nusvilai.")),
-              Center(child: Text(game.getCurrentQuestion().explanation)),
-              FullWidthButton(
-                text: "Pabandom dar kartą?",
-                fontSize: 24,
-                onPressed: () {
-                  Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(builder: (context) => QuizComponent()),
-                  );
-                },
-              ),
-              FullWidthButton(
-                text: "Pasiilsim",
-                fontSize: 24,
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-              ),
-            ],
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
+      body: SafeArea(
+        child: Center(
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Center(
+                    child: Text(
+                      "Puolimas nepaėjo! \nNusvilai",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 32,
+                      ),
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(0, 8, 0, 32),
+                  child: FullWidthButton(
+                    text: game.getCurrentQuestion().explanation,
+                    onPressed: () {},
+                    fontSize: 20,
+                  ),
+                ),
+                FullWidthButton(
+                  text: "Pabandom dar kartą?",
+                  fontSize: 24,
+                  onPressed: () {
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => QuizComponent()),
+                    );
+                  },
+                ),
+                FullWidthButton(
+                  text: "Pasiilsim",
+                  fontSize: 24,
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                ),
+              ],
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+            ),
           ),
-        ],
+        ),
       ),
     );
   }

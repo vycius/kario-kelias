@@ -45,26 +45,34 @@ class _UserLoginComponentState extends State<UserLoginComponent> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: new Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: <Widget>[
-        Padding(
-          padding: const EdgeInsets.all(24.0),
-          child: FractionallySizedBox(
-            widthFactor: 0.4,
-            child: Image.asset("assets/logo.png"),
+      body: SafeArea(
+        child: Container(
+          child: Center(
+            child: new Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                Padding(
+                  padding: const EdgeInsets.all(24.0),
+                  child: FractionallySizedBox(
+                    widthFactor: 0.7,
+                    child: Image.asset("assets/logo.png"),
+                  ),
+                ),
+                Flexible(
+                  child: new LoginView(
+                    providers: [
+                      ProvidersTypes.google,
+                    ],
+                    passwordCheck: false,
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
-        new Expanded(
-          child: new LoginView(
-            providers: [
-              ProvidersTypes.google,
-            ],
-            passwordCheck: false,
-          ),
-        ),
-      ],
-    ));
+      ),
+    );
   }
 
   void _checkCurrentUser() async {
