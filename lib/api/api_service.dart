@@ -1,4 +1,6 @@
 import 'package:dio/dio.dart';
+import 'package:kario_kelias/authentication/authentication_manager.dart';
+import 'package:kario_kelias/preferences/app_preferences.dart';
 import 'package:kario_kelias/questions.dart';
 
 class ApiService {
@@ -18,34 +20,37 @@ class ApiService {
     baseUrl: _baseApiUrl,
   ));
 
-//  final _appPreferences = AppPreferences();
-//  final _authenticationManager = AuthenticationManager();
+  final _appPreferences = AppPreferences();
+  final _authenticationManager = AuthenticationManager();
 
   ApiService._internal() {
     dio.interceptors
         .add(InterceptorsWrapper(onRequest: (RequestOptions options) async {
-      final apiToken = "dcb0be97601574147fd62aa6ae40ba9022d87319";
-//      final apiToken = await _appPreferences.getApiToken();
+          print("Before API token");
+      final apiToken = await _appPreferences.getApiToken();
+          print("Api token $apiToken");
 
       if (apiToken != null) {
         _addHeaderApiToken(options.headers, apiToken);
+      } else if (await _authenticationManager.isLoggedIn()) {
+        try {
+          dio.interceptors.requestLock.lock();
+          final idToken = await _authenticationManager.getIdToken();
+          print("Id token: $idToken");
+          if (idToken != null) {
+            final apiToken = await _authenticate(idToken);
+            print("New API token: $apiToken");
+
+            await _appPreferences.setApiToken(apiToken);
+
+            _addHeaderApiToken(options.headers, apiToken);
+          }
+        } catch (ex) {
+          print(ex);
+        } finally {
+          dio.interceptors.requestLock.unlock();
+        }
       }
-//      else if (await _authenticationManager.isLoggedIn()) {
-//        try {
-//          dio.interceptors.requestLock.lock();
-//          final idToken = await _authenticationManager.getIdToken();
-//          if (idToken != null) {
-//            final apiToken = await _authenticate(idToken);
-//            await _appPreferences.setApiToken(apiToken);
-//
-//            _addHeaderApiToken(options.headers, apiToken);
-//          }
-//        } catch (ex) {
-//          print(ex);
-//        } finally {
-//          dio.interceptors.requestLock.unlock();
-//        }
-//      }
 
       return options;
     }, onResponse: (Response response) {
