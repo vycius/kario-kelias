@@ -45,6 +45,7 @@ class WidthButton extends StatelessWidget {
       child: Text(
         text,
         style: TextStyle(fontSize: fontSize),
+        textAlign: TextAlign.center,
       ),
       padding: EdgeInsets.all(16),
       onPressed: onPressed,
